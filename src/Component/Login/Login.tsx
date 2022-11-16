@@ -52,4 +52,4 @@ const Login = (props:Props) => {
   }
 }
 
-export default Login;
+export default Login; 
