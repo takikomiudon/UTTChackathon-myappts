@@ -4,9 +4,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { UserResponse } from '../../type'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
 
 type Props = {
-  id: string
+  nameid: string
   contributorId: string
   setContributorId: React.Dispatch<React.SetStateAction<string>>
   point: number
@@ -16,15 +21,15 @@ type Props = {
   onSubmit: (nameid: string, contributorId: string, point: number, message: string) => void
 };
 
-const Update = (props: Props) => {
+const Form = (props: Props) => {
   const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    props.onSubmit(props.id, props.contributorId, props.point, props.message)
+    props.onSubmit(props.nameid, props.contributorId, props.point, props.message)
   }
   
   const [users,setUsers] = React.useState<UserResponse[]>([]);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleUser = (event: SelectChangeEvent) => {
     props.setContributorId(event.target.value);
   };
 
@@ -54,45 +59,52 @@ const Update = (props: Props) => {
   return (
     <div>
       <form style={{ display: "flex", flexDirection: "column" }}>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-      <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={props.contributorId}
-          label="User"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {users.map((user,index) => (
-            <MenuItem
-              key={index}
-              value={user.NameId}
-            >
-              {user.Name} ID:{user.NameId}
-            </MenuItem>
-          ))}
-          </Select>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            value={props.contributorId}
+            label="User"
+            onChange={handleUser}
+          >
+            {users.map((user,index) => (
+              <MenuItem
+                key={index}
+                value={user.NameId}
+              >
+                {user.Name} ID:{user.NameId}
+              </MenuItem>
+            ))}
+            </Select>
+          </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 12 }}>
+          <OutlinedInput
+              id="outlined-number"
+              type="number"
+              value={props.point}
+              onChange={(e) => props.setPoint(Number(e.target.value))}
+              endAdornment={<InputAdornment position="end">Point</InputAdornment>}
+          />
         </FormControl>
-        <label>Point: </label>
-        <input
-          type={"number"}
-          value={props.point}
-          onChange={(e) => props.setPoint(e.target.valueAsNumber)}
-        ></input>
-        <label>Message: </label>
-        <input
-          type={"text"}
-          style={{ marginBottom: 20 }}
-          value={props.message}
-          onChange={(e) => props.setMessage(e.target.value)}
-        ></input>
-        <button onClick={(e) => submit(e)}>Submit</button>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <TextField 
+              id="outlined-basic" 
+              type="text" 
+              label="Message" 
+              variant="outlined" 
+              value={props.message}
+              onChange={(e) => props.setMessage(e.target.value)} 
+          />
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <Button variant="contained" endIcon={<SendIcon />} onClick={(e) => submit(e)}>
+            Send
+          </Button>
+        </FormControl>
       </form>
   </div>
   );
 };
 
-export default Update;
+export default Form;

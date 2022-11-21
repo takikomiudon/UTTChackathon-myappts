@@ -15,6 +15,7 @@ type Props = {
 export default function SelectLabels(props:Props) {
   const handleChange = (event: SelectChangeEvent) => {
     props.setNameId(event.target.value);
+    localStorage.setItem("nameid",event.target.value)
   };
 
   const fetchUsers = async ()=>{

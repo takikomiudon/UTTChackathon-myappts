@@ -1,12 +1,11 @@
 import '../../App.css';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import Form from './Form';
-import { Link } from "react-router-dom";
 import Header from '../Header';
 
 type Props = {
   nameid: string
-}
+};
 
 const FormPage = (props:Props) => {
   const [contributorId, setContributorId] = useState("");
@@ -70,15 +69,15 @@ const FormPage = (props:Props) => {
     <div className="App">
       <Header/>
       <body>
-        <Form 
-          nameid={props.nameid} 
-          contributorId={contributorId} 
-          setContributorId={setContributorId} 
-          point={point} 
-          setPoint={setPoint} 
-          message={message} 
-          setMessage={setMessage} 
-          onSubmit={onSubmit} 
+        <Form
+          nameid={props.nameid}
+          contributorId={contributorId}
+          setContributorId={setContributorId}
+          point={point}
+          setPoint={setPoint}
+          message={message}
+          setMessage={setMessage}
+          onSubmit={onSubmit}
         />
       </body>
     </div>

@@ -15,7 +15,7 @@ const Header = () => {
       <div className="App-header">
         UTokyo Tech Club 大感謝祭
         <Stack direction="row" spacing={8}>
-            {/* <Link to="/home" style={{ textDecoration: 'none' }}><Button variant="outlined" startIcon={<HomeOutlinedIcon/>}>Home</Button></Link> */}
+            <Link to="/home" style={{ textDecoration: 'none' }}><Button variant="outlined" startIcon={<HomeOutlinedIcon/>}>Home</Button></Link>
             <Link to="/ranking" style={{ textDecoration: 'none' }}><Button href="/ranking" variant="outlined" startIcon={<WorkspacePremiumOutlinedIcon/>}>Ranking</Button></Link>
             <Link to="/list" style={{ textDecoration: 'none' }}><Button href="/list" variant="outlined" startIcon={<FormatListBulletedOutlinedIcon/>}>List</Button></Link>
             <Link to="/post" style={{ textDecoration: 'none' }}><Button href="/post" variant="outlined" startIcon={<ForwardToInboxOutlinedIcon/>}>Post</Button></Link>

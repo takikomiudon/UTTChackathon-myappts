@@ -6,7 +6,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
-const Register = () => {
+type Props = {
+    nameid: string
+}
+
+const UserUpdate = (props:Props) => {
   const [name,setName] = useState("")
   const onSubmit = async (name:string) => {
     if (name.length > 50 || name.length==0){
@@ -16,13 +20,14 @@ const Register = () => {
     
     try{
       const response = await fetch(
-        "http://localhost:8000/register",
+        "http://localhost:8000/userupdate",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            nameid: props.nameid,
             name: name
           }),
         });
@@ -48,7 +53,7 @@ const Register = () => {
       <Header/>
       <body>
         <p>
-          User Register Page
+          User Update Page
         </p>
         <form style={{ display: "flex", flexDirection: "column" }}>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -72,4 +77,4 @@ const Register = () => {
   );
 }
 
-export default Register;
+export default UserUpdate;

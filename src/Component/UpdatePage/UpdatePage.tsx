@@ -1,7 +1,6 @@
 import '../../App.css';
 import { useState, useEffect } from "react";
 import Update from './Update';
-import { Link } from "react-router-dom";
 import Header from '../Header';
 
 type Props = {
@@ -71,7 +70,7 @@ const UpdatePage = (props:Props) => {
       <Header/>
       <body>
         <Update
-          id={props.id} 
+          nameid={props.id} 
           contributorId={contributorId} 
           setContributorId={setContributorId} 
           point={point} 

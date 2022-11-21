@@ -57,7 +57,7 @@ const Form = (props: Props) => {
   },[]);
 
   return (
-    <div>
+    <div className="App">
       <form style={{ display: "flex", flexDirection: "column" }}>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-helper-label">User</InputLabel>

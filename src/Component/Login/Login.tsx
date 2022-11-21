@@ -19,7 +19,6 @@ const Login = (props:Props) => {
     console.log("users",users)
   }, [users]);
 
-  //TODO name無しでログインしようとした時にブロックする
   if (props.NameId == "") {
     return (
       <div className="App">

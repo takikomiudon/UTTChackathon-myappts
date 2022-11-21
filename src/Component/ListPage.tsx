@@ -15,6 +15,24 @@ function ListPage(props:Props) {
 
   const fetchUsers = async ()=>{
     try {
+      const res = await fetch ("http://localhost:8000/allcontribution",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+      if (!res.ok){
+        throw Error(`Failed to fetch users: ${res.status}`);
+      }
+      const contribution = await res.json();
+      setContribution(contribution);
+    } catch(err) {
+      console.error(err)
+    }
+
+
+    try {
       const res = await fetch ("http://localhost:8000/mycontribution?nameid=" + props.nameid,
       {
         method: "GET",

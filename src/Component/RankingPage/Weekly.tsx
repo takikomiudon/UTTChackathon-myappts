@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import '../App.css';
-import { User } from '../type'
-import Header from './Header';
+import '../../App.css';
+import { User } from '../../type'
 
-const RankingPage = () => {
+const Weekly = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/pointranking",
+      const res = await fetch ("http://localhost:8000/weeklyranking",
       {
         method: "GET",
         headers: {
@@ -32,11 +31,7 @@ const RankingPage = () => {
 
   return (
     <div className="App">
-      <Header/>
       <body>
-        <p>
-          POINT RANKING
-        </p>
         {users.map((users,index) =>
         <section key={index}>
           <h2>{index+1}位  {users.Name}  {users.Point}POINT</h2>
@@ -47,4 +42,4 @@ const RankingPage = () => {
   );
 }
 
-export default RankingPage;
+export default Weekly;
