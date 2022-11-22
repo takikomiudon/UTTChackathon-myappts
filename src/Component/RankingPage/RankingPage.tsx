@@ -2,13 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Header from '../Header'
+import Header from '../Header';
 import Typography from '@mui/material/Typography';
 import AllTime from './AllTime';
 import Annual from './Annual';
 import Weekly from './Weekly';
 import Monthly from './Monthly';
-import Daily from './Daily'
+import Daily from './Daily';
 
 type TabPanelProps = {
   children?: React.ReactNode;

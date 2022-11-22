@@ -35,7 +35,7 @@ const Form = (props: Props) => {
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/login",
+      const res = await fetch ("http://localhost:8000/contributorlist?nameid=" + props.nameid,
       {
         method: "GET",
         headers: {

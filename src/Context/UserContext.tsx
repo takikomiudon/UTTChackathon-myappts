@@ -1,10 +1,21 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useContext } from "react";
 
-export type contextType = {};
+type User = {
+  nameId: string; 
+  contributionId: string; 
+  contributorId: string; 
+  point: number; 
+  message: string; 
+};
 
-export const UserContext = createContext<contextType|undefined>(undefined);
+export type contextType = { 
+  userInfo: User;
+  setUserInfo: React.Dispatch<React.SetStateAction<User>>; 
+  };
 
-const { Provider } = UserContext;
+export const userContext = createContext<contextType|undefined>(undefined);
+
+const { Provider } = userContext;
 
 interface Props {
   children: ReactNode
@@ -12,14 +23,13 @@ interface Props {
 
 export const UserProvider = (props:Props) => {
   const { children } = props;
-  
-  const [userInfo,setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<User>({
     nameId: "",
     contributionId: "",
     contributorId: "",
     point: 0,
     message: "",
-  });
+  })
 
   return (
     <Provider value={{userInfo, setUserInfo}}>
@@ -27,6 +37,17 @@ export const UserProvider = (props:Props) => {
     </Provider>
   );
 };
+
+type UseContextType = () => contextType;
+
+export const useUserInfo: UseContextType = () => {
+  const context = useContext(userContext);
+
+  if (!context) throw new Error("WithoutProviderError");
+
+  return context;
+};
+
 
 // export type ${PascalCase} = {};
 // これ何のために定義したの 初期化するため。なんか知らんけど脳死でやっとけ

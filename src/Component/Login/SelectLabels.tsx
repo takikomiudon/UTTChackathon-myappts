@@ -4,6 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { UserResponse } from '../../type'
+import {useUserInfo} from "../../Context/UserContext"
 
 type Props = {
   NameId: string
@@ -13,8 +14,11 @@ type Props = {
 };
 
 export default function SelectLabels(props:Props) {
+  const {userInfo, setUserInfo} = useUserInfo();
+
   const handleChange = (event: SelectChangeEvent) => {
     props.setNameId(event.target.value);
+    setUserInfo({...userInfo, nameId: event.target.value})
     localStorage.setItem("nameid",event.target.value)
   };
 
@@ -62,6 +66,7 @@ export default function SelectLabels(props:Props) {
           ))}
         </Select>
       </FormControl>
+      {userInfo.nameId} 0
     </div>
   );
 }

@@ -3,7 +3,7 @@ import {useState} from "react";
 import Home from "./Component/Home"
 import Register from "./Component/Register"
 import Login from "./Component/Login/Login"
-import List from "./Component/ListPage"
+import List from "./Component/List/ListPage"
 import Ranking from "./Component/RankingPage/RankingPage"
 import Form from "./Component/FormPage/FormPage"
 import Update from "./Component/UpdatePage/UpdatePage"

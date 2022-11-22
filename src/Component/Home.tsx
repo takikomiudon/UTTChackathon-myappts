@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
-import {UserContext} from "../Context/UserContext";
+import {useUserInfo} from "../Context/UserContext";
 
 type Props = {
   nameid: string;
 }
 
 function Home(props:Props) {
-  const [name,setName] = useState("")
+  const [name,setName] = useState("");
   const fetchUsers = async ()=>{
     try {
       const res = await fetch ("http://localhost:8000/home?nameid=" + props.nameid,

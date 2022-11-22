@@ -9,11 +9,6 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 const Register = () => {
   const [name,setName] = useState("")
   const onSubmit = async (name:string) => {
-    if (name.length > 50 || name.length==0){
-      alert("Please enter a name between 1 and 50 characters")
-      return 
-    }
-    
     try{
       const response = await fetch(
         "http://localhost:8000/register",
@@ -38,9 +33,13 @@ const Register = () => {
   };
 
   const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    alert(`${name} was registered.`)
-    e.preventDefault()
-    onSubmit(name)
+    if (name.length > 50 || name.trim().length==0){
+      alert("Please enter a name between 1 and 50 characters")
+    } else {
+      alert(`${name} was registered.`)
+      e.preventDefault()
+      onSubmit(name)
+    }
   }
 
   return (

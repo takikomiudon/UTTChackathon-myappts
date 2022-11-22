@@ -2,6 +2,7 @@ import '../../App.css';
 import { useState, useEffect } from 'react';
 import Form from './Form';
 import Header from '../Header';
+import Snackbars from './Snackbar';
 
 type Props = {
   nameid: string
@@ -25,6 +26,8 @@ const FormPage = (props:Props) => {
 
     if (message.length > 100){
       alert("Please enter a message shorter than 100 characters")
+    } else if (message.trim().length == 0){
+      alert("Please enter a message")
     }
 
     try{
