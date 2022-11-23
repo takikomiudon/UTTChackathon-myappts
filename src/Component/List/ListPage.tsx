@@ -3,19 +3,17 @@ import '../../App.css';
 import { Contribution, Contributed } from '../../type';
 import { Link } from "react-router-dom";
 import Header from '../Header';
+import {useUserInfo} from "../../Context/UserContext";
+import {url} from "../../type";
 
-type Props = {
-  nameid: string;
-  setId: React.Dispatch<React.SetStateAction<string>>
-}
-
-function ListPage(props:Props) {
+function ListPage() {
+  const {userInfo, setUserInfo} = useUserInfo();
   const [contribution, setContribution] = useState<Contribution []>([]);
   const [contributed, setContributed] = useState<Contributed []>([]);
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/allcontribution",
+      const res = await fetch (url+"/allcontribution",
       {
         method: "GET",
         headers: {
@@ -33,7 +31,7 @@ function ListPage(props:Props) {
 
 
     try {
-      const res = await fetch ("http://localhost:8000/mycontribution?nameid=" + props.nameid,
+      const res = await fetch (url+"/mycontribution?nameid=" + userInfo.nameId,
       {
         method: "GET",
         headers: {
@@ -50,7 +48,7 @@ function ListPage(props:Props) {
     }
 
     try {
-        const res = await fetch ("http://localhost:8000/mycontributed?nameid=" + props.nameid,
+        const res = await fetch (url + "/mycontributed?nameid=" + userInfo.nameId,
         {
           method: "GET",
           headers: {
@@ -70,7 +68,7 @@ function ListPage(props:Props) {
   const onDelete = async (id: string) =>{
     try{
       const response = await fetch(
-        "http://localhost:8000/contributiondelete",
+        url+"/contributiondelete",
         {
           method: "POST",
           headers: {
@@ -112,7 +110,7 @@ function ListPage(props:Props) {
             <p>
               TO {c.Contributor}  {c.Point}Pt  Message:{c.Message}
               <Link to='/update'>
-              <button onClick={() => props.setId(c.Id)}>Update</button>
+              <button onClick={() => setUserInfo({...userInfo, contributionId: c.Id})}>Update</button>
               </Link>
               <button
                 onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
