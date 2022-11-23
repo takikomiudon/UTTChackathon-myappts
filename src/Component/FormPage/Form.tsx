@@ -9,33 +9,30 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import {useUserInfo} from "../../Context/UserContext";
+import {url} from '../../type';
 
 type Props = {
-  nameid: string
-  contributorId: string
-  setContributorId: React.Dispatch<React.SetStateAction<string>>
-  point: number
-  setPoint: React.Dispatch<React.SetStateAction<number>>
-  message: string
-  setMessage: React.Dispatch<React.SetStateAction<string>>
   onSubmit: (nameid: string, contributorId: string, point: number, message: string) => void
 };
 
 const Form = (props: Props) => {
+  const {userInfo, setUserInfo} = useUserInfo();
+
   const submit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    props.onSubmit(props.nameid, props.contributorId, props.point, props.message)
+    props.onSubmit(userInfo.nameId, userInfo.contributorId, userInfo.point, userInfo.message)
   }
   
   const [users,setUsers] = React.useState<UserResponse[]>([]);
 
   const handleUser = (event: SelectChangeEvent) => {
-    props.setContributorId(event.target.value);
+    setUserInfo({...userInfo,contributorId: event.target.value});
   };
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/contributorlist?nameid=" + props.nameid,
+      const res = await fetch (url+"/contributorlist?nameid=" + userInfo.nameId,
       {
         method: "GET",
         headers: {
@@ -64,7 +61,7 @@ const Form = (props: Props) => {
           <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            value={props.contributorId}
+            value={userInfo.contributorId}
             label="User"
             onChange={handleUser}
           >
@@ -82,8 +79,8 @@ const Form = (props: Props) => {
           <OutlinedInput
               id="outlined-number"
               type="number"
-              value={props.point}
-              onChange={(e) => props.setPoint(Number(e.target.value))}
+              value={userInfo.point}
+              onChange={(e) => setUserInfo({...userInfo, point: Number(e.target.value)})}
               endAdornment={<InputAdornment position="end">Point</InputAdornment>}
           />
         </FormControl>
@@ -93,8 +90,8 @@ const Form = (props: Props) => {
               type="text" 
               label="Message" 
               variant="outlined" 
-              value={props.message}
-              onChange={(e) => props.setMessage(e.target.value)} 
+              value={userInfo.message}
+              onChange={(e) => setUserInfo({...userInfo, message: e.target.value})} 
           />
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 120 }}>

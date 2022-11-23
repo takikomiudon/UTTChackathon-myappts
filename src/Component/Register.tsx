@@ -5,13 +5,14 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import {url} from "../type";
 
 const Register = () => {
   const [name,setName] = useState("")
   const onSubmit = async (name:string) => {
     try{
       const response = await fetch(
-        "http://localhost:8000/register",
+        url+"/register",
         {
           method: "POST",
           headers: {

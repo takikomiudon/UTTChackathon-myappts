@@ -17,21 +17,20 @@ function App() {
   }
 
   const [nameid, setNameId] = useState(defaultnameid);
-  const [id, setId] = useState("");
 
   return (
     <div className="app">
       <UserProvider>
         <Router>
           <Routes>
-            <Route path="/home" element={<Home nameid={nameid}/>}/>
+            <Route path="/home" element={<Home/>}/>
             <Route path="/register" element={<Register/>}/>
-            <Route path="/login" element={<Login NameId={nameid} setNameId={setNameId}/>}/>
-            <Route path="/list" element={<List nameid={nameid} setId={setId}/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/list" element={<List/>}/>
             <Route path="/ranking" element={<Ranking/>}/>
-            <Route path="/post" element={<Form nameid={nameid}/>}/>
-            <Route path="/update" element={<Update id={id}/>}/>
-            <Route path="/userupdate" element={<UserUpdate nameid={nameid}/>}/>
+            <Route path="/post" element={<Form/>}/>
+            <Route path="/update" element={<Update/>}/>
+            <Route path="/userupdate" element={<UserUpdate/>}/>
           </Routes>
         </Router>
       </UserProvider>

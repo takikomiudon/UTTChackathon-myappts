@@ -17,3 +17,4 @@ export type Contributed = {
     Point: number,
     Message: string
 }
+export const url = 'http://localhost:8000'

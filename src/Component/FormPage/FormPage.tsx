@@ -1,17 +1,12 @@
 import '../../App.css';
-import { useState, useEffect } from 'react';
 import Form from './Form';
 import Header from '../Header';
 import Snackbars from './Snackbar';
+import {useUserInfo} from "../../Context/UserContext";
+import {url} from "../../type";
 
-type Props = {
-  nameid: string
-};
-
-const FormPage = (props:Props) => {
-  const [contributorId, setContributorId] = useState("");
-  const [point, setPoint] = useState(0);
-  const [message, setMessage] = useState(""); 
+const FormPage = () => {
+  const {userInfo, setUserInfo} = useUserInfo();
 
   const onSubmit = async (nameid:string, contributorId:string, point:number, message:string) => {
     if (!contributorId) {
@@ -32,7 +27,7 @@ const FormPage = (props:Props) => {
 
     try{
       const response = await fetch(
-        "http://localhost:8000/contributionpost",
+        url + "/contributionpost",
         {
           method: "POST",
           headers: {
@@ -56,30 +51,17 @@ const FormPage = (props:Props) => {
           throw Error(`Failed to create user ${response.status}`);
         }
 
-        setContributorId("");
-        setPoint(0);
-        setMessage("");
+        setUserInfo({...userInfo, contributorId: "", point: 0, message: ""});
       } catch(err) {
         console.error(err);
     }
   };
-
-  useEffect(() => {
-    console.log("point",point)
-  }, [point])
 
   return (
     <div className="App">
       <Header/>
       <body>
         <Form
-          nameid={props.nameid}
-          contributorId={contributorId}
-          setContributorId={setContributorId}
-          point={point}
-          setPoint={setPoint}
-          message={message}
-          setMessage={setMessage}
           onSubmit={onSubmit}
         />
       </body>

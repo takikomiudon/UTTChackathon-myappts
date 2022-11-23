@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import '../../App.css';
-import { User } from '../../type'
+import { User, url } from '../../type'
 
 const Weekly = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/weeklyranking",
+      const res = await fetch (url+"/weeklyranking",
       {
         method: "GET",
         headers: {

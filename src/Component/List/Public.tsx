@@ -3,6 +3,7 @@ import '../../App.css';
 import { Contribution, Contributed } from '../../type';
 import { Link } from "react-router-dom";
 import Header from '../Header';
+import {url} from "../../type";
 
 type Props = {
   nameid: string;
@@ -15,7 +16,7 @@ function ListPage(props:Props) {
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/allcontribution",
+      const res = await fetch (url+"/allcontribution",
       {
         method: "GET",
         headers: {
@@ -33,7 +34,7 @@ function ListPage(props:Props) {
 
 
     try {
-      const res = await fetch ("http://localhost:8000/mycontribution?nameid=" + props.nameid,
+      const res = await fetch (url+"/mycontribution?nameid=" + props.nameid,
       {
         method: "GET",
         headers: {
@@ -50,7 +51,7 @@ function ListPage(props:Props) {
     }
 
     try {
-        const res = await fetch ("http://localhost:8000/mycontributed?nameid=" + props.nameid,
+        const res = await fetch (url+"/mycontributed?nameid=" + props.nameid,
         {
           method: "GET",
           headers: {
@@ -70,7 +71,7 @@ function ListPage(props:Props) {
   const onDelete = async (id: string) =>{
     try{
       const response = await fetch(
-        "http://localhost:8000/contributiondelete",
+        url+"/contributiondelete",
         {
           method: "POST",
           headers: {

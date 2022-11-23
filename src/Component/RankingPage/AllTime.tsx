@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import '../../App.css';
-import { User } from '../../type'
+import { User, url } from '../../type'
 
 const AllTime = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/alltimeranking",
+      const res = await fetch (url+"/alltimeranking",
       {
         method: "GET",
         headers: {

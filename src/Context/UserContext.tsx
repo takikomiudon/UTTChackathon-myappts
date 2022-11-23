@@ -1,7 +1,8 @@
 import { createContext, useState, ReactNode, useContext } from "react";
 
 type User = {
-  nameId: string; 
+  nameId: string;
+  name: string;
   contributionId: string; 
   contributorId: string; 
   point: number; 
@@ -24,7 +25,8 @@ interface Props {
 export const UserProvider = (props:Props) => {
   const { children } = props;
   const [userInfo, setUserInfo] = useState<User>({
-    nameId: "",
+    nameId: localStorage.getItem("nameid") == null ? "":String(localStorage.getItem("nameid")),
+    name: localStorage.getItem("name") == null ? "":String(localStorage.getItem("name")),
     contributionId: "",
     contributorId: "",
     point: 0,

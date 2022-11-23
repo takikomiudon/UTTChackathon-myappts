@@ -1,16 +1,11 @@
 import '../../App.css';
-import { useState, useEffect } from "react";
 import Update from './Update';
 import Header from '../Header';
+import {useUserInfo} from "../../Context/UserContext";
+import {url} from "../../type";
 
-type Props = {
-  id: string
-}
-
-const UpdatePage = (props:Props) => {
-  const [contributorId, setContributorId] = useState("");
-  const [point, setPoint] = useState(0);
-  const [message, setMessage] = useState(""); 
+const UpdatePage = () => {
+  const {userInfo,setUserInfo} = useUserInfo();
 
   const onSubmit = async (id:string, contributorId:string, point:number, message:string) => {
     if (!contributorId) {
@@ -29,7 +24,7 @@ const UpdatePage = (props:Props) => {
 
     try{
       const response = await fetch(
-        "http://localhost:8000/contributionupdate",
+        url+"/contributionupdate",
         {
           method: "POST",
           headers: {
@@ -52,32 +47,17 @@ const UpdatePage = (props:Props) => {
         if (!response.ok){
           throw Error(`Failed to create user ${response.status}`);
         }
-
-        setContributorId("");
-        setPoint(0);
-        setMessage("");
+        setUserInfo({...userInfo, contributorId: "", point: 0, message: ""})
       } catch(err) {
         console.error(err);
     }
   };
 
-  useEffect(() => {
-    console.log("point",point)
-  }, [point])
-
   return (
     <div className="App">
       <Header/>
       <body>
-        <Update
-          nameid={props.id} 
-          contributorId={contributorId} 
-          setContributorId={setContributorId} 
-          point={point} 
-          setPoint={setPoint} 
-          message={message} 
-          setMessage={setMessage} 
-          onSubmit={onSubmit} 
+        <Update onSubmit={onSubmit} 
         />
       </body>
     </div>

@@ -3,28 +3,57 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { UserResponse } from '../../type'
-import {useUserInfo} from "../../Context/UserContext"
+import { UserResponse } from '../../type';
+import {useUserInfo} from "../../Context/UserContext";
+import {useState} from 'react';
+import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import {url} from "../../type";
 
 type Props = {
-  NameId: string
-  setNameId: React.Dispatch<React.SetStateAction<string>>
   users: UserResponse[]
   setUsers: React.Dispatch<React.SetStateAction<UserResponse[]>>
 };
 
 export default function SelectLabels(props:Props) {
   const {userInfo, setUserInfo} = useUserInfo();
+  const [idInput, setIdInput] = useState("")
 
   const handleChange = (event: SelectChangeEvent) => {
-    props.setNameId(event.target.value);
-    setUserInfo({...userInfo, nameId: event.target.value})
-    localStorage.setItem("nameid",event.target.value)
+    setIdInput(event.target.value)
+  }
+
+  const fetchName = async ()=>{
+    try {
+      const res = await fetch (url+"/home?nameid=" + idInput,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+      if (!res.ok){
+        throw Error(`Failed to fetch users: ${res.status}`);
+      }
+      const user = await res.json();
+      setUserInfo({...userInfo, name: user});
+      localStorage.setItem('name',user)
+    } catch(err) {
+      console.error(err)
+    }
   };
+
+  const handleLogin = () => {
+    setUserInfo({...userInfo, nameId: idInput})
+    localStorage.setItem("nameid",idInput)
+    setIdInput("")
+    fetchName()
+  }
 
   const fetchUsers = async ()=>{
     try {
-      const res = await fetch ("http://localhost:8000/login",
+      const res = await fetch (url+"/login",
       {
         method: "GET",
         headers: {
@@ -43,16 +72,41 @@ export default function SelectLabels(props:Props) {
 
   React.useEffect(() => {
       fetchUsers()
+      fetchName()
   },[]);
 
   return (
+    idInput=="" ?
+      <div className='App'>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={idInput}
+              label="User"
+              onChange={handleChange}
+            >
+              {props.users.map((user,index) => (
+                <MenuItem
+                  key={index}
+                  value={user.NameId}
+                >
+                  {user.Name} ID:{user.NameId}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+      </div>
+    :
+    <div className='App'>
     <div>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-helper-label">User</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={props.NameId}
+          value={idInput}
           label="User"
           onChange={handleChange}
         >
@@ -66,7 +120,12 @@ export default function SelectLabels(props:Props) {
           ))}
         </Select>
       </FormControl>
-      {userInfo.nameId} 0
     </div>
+    <div>
+        <Button variant="contained" startIcon={<LoginOutlinedIcon/>} onClick={handleLogin} href='/home'>
+          Login
+        </Button>
+    </div>
+  </div>
   );
 }

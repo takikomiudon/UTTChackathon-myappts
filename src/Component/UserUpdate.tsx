@@ -5,12 +5,11 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import {useUserInfo} from "../Context/UserContext";
+import {url} from "../type";
 
-type Props = {
-    nameid: string
-}
-
-const UserUpdate = (props:Props) => {
+const UserUpdate = () => {
+  const {userInfo} = useUserInfo();
   const [name,setName] = useState("")
   const onSubmit = async (name:string) => {
     if (name.length > 50 || name.length==0){
@@ -20,14 +19,14 @@ const UserUpdate = (props:Props) => {
     
     try{
       const response = await fetch(
-        "http://localhost:8000/userupdate",
+        url+"/userupdate",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nameid: props.nameid,
+            nameid: userInfo.nameId,
             name: name
           }),
         });
