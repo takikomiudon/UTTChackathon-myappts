@@ -25,7 +25,7 @@ interface Props {
 export const UserProvider = (props:Props) => {
   const { children } = props;
   const [userInfo, setUserInfo] = useState<User>({
-    nameId: localStorage.getItem("nameid") == null ? "":String(localStorage.getItem("nameid")),
+    nameId: localStorage.getItem("nameId") == null ? "":String(localStorage.getItem("nameId")),
     name: localStorage.getItem("name") == null ? "":String(localStorage.getItem("name")),
     contributionId: "",
     contributorId: "",

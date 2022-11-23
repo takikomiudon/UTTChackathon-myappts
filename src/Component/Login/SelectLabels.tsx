@@ -22,6 +22,7 @@ export default function SelectLabels(props:Props) {
 
   const handleChange = (event: SelectChangeEvent) => {
     setIdInput(event.target.value)
+    console.log(event.target.value)
   }
 
   const fetchName = async ()=>{
@@ -37,18 +38,17 @@ export default function SelectLabels(props:Props) {
         throw Error(`Failed to fetch users: ${res.status}`);
       }
       const user = await res.json();
-      setUserInfo({...userInfo, name: user});
-      localStorage.setItem('name',user)
+      setUserInfo({...userInfo, name: user, nameId: idInput});
+      localStorage.setItem('name', user)
+      localStorage.setItem('nameId', idInput)
     } catch(err) {
       console.error(err)
     }
   };
 
   const handleLogin = () => {
-    setUserInfo({...userInfo, nameId: idInput})
-    localStorage.setItem("nameid",idInput)
-    setIdInput("")
     fetchName()
+    setIdInput("")
   }
 
   const fetchUsers = async ()=>{
@@ -122,9 +122,11 @@ export default function SelectLabels(props:Props) {
       </FormControl>
     </div>
     <div>
-        <Button variant="contained" startIcon={<LoginOutlinedIcon/>} onClick={handleLogin} href='/home'>
+      <Link to='/home'>
+        <Button variant="contained" startIcon={<LoginOutlinedIcon/>} onClick={handleLogin}>
           Login
         </Button>
+      </Link>
     </div>
   </div>
   );

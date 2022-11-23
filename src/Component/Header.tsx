@@ -31,7 +31,12 @@ const Header = () => {
           <Link to="/list" style={{ textDecoration: 'none' }}><Button href="/list" variant="outlined" startIcon={<FormatListBulletedOutlinedIcon/>}>List</Button></Link>
           <Link to="/post" style={{ textDecoration: 'none' }}><Button href="/post" variant="outlined" startIcon={<ForwardToInboxOutlinedIcon/>}>Post</Button></Link>
           <Link to="/register" style={{ textDecoration: 'none' }}><Button href="/register" variant="outlined" startIcon={<PersonAddAltOutlinedIcon/>}>Register</Button></Link>
-          <Link to="/login" style={{ textDecoration: 'none' }}><Button href="/login" variant="outlined" startIcon={<LogoutOutlinedIcon/>} onClick={() => {setUserInfo({...userInfo, nameId: ""})}}>Logout</Button></Link>
+          <Link to="/login" style={{ textDecoration: 'none' }}><Button href="/login" variant="outlined" startIcon={<LogoutOutlinedIcon/>} 
+          onClick={() => {
+            setUserInfo({...userInfo, nameId: ""})
+            localStorage.setItem("nameid","")
+            localStorage.setItem("name","")
+            }}>Logout</Button></Link>
           <div style={{flexGrow: 1}}></div>
           <p>{userInfo.name}</p>
       </Stack>
