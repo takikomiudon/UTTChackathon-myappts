@@ -45,7 +45,7 @@ const Register = () => {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         <p>
           User Register Page

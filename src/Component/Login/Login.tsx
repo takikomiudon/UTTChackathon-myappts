@@ -9,7 +9,7 @@ const Login = () => {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         <p>
           Login Page

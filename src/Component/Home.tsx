@@ -37,7 +37,7 @@ function Home() {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         Welcome, {userInfo.name}！！
       </body>

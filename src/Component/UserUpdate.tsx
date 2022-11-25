@@ -49,7 +49,7 @@ const UserUpdate = () => {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         <p>
           User Update Page

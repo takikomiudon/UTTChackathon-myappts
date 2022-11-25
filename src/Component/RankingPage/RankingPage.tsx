@@ -52,7 +52,7 @@ export default function Ranking() {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <p>POINT RANKING</p>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <Tabs value={value} onChange={handleChange} centered>

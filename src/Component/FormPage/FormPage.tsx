@@ -59,7 +59,7 @@ const FormPage = () => {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         <Form
           onSubmit={onSubmit}

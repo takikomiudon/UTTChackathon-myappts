@@ -95,7 +95,7 @@ function ListPage() {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body style={{flex:1, width: "100%", flexDirection: "column"}}>
         <h1>Your Contribution</h1>
         {contribution.map((c,index) =>

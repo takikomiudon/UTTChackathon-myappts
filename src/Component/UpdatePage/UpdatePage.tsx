@@ -55,7 +55,7 @@ const UpdatePage = () => {
 
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       <body>
         <Update onSubmit={onSubmit} 
         />
