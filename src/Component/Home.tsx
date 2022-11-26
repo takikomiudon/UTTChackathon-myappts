@@ -7,6 +7,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import {useUserInfo} from "../Context/UserContext";
 import {url} from "../type";
+import Typography from '@mui/material/Typography';
 
 function Home() {
   const {userInfo, setUserInfo} = useUserInfo();
@@ -54,6 +55,16 @@ function Home() {
               }}>
         Delete User
       </Button>
+      <h2>About This Site</h2>
+      <h3>
+        このサイトは<br/><h1>「Contribute」</h1><br/>を可視化するシステムです。
+      </h3>
+      <h3>
+        レビューをしてくれた<br/>質問に答えてくれた<br/>友達をUTTCに紹介してくれた<br/>などの貢献をPOINTの付与とともに投稿して感謝を伝えましょう。
+      </h3>
+      <h3>
+        100POINTごとに豪華な称号が手に入ります。
+      </h3>
     </div>
   );
 };
