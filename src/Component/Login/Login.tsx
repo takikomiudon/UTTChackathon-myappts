@@ -3,6 +3,7 @@ import '../../App.css';
 import { UserResponse } from '../../type'
 import SelectLabels from './SelectLabels';
 import Header from '../Header';
+import daikansha from '../../daikansha.png'
 
 const Login = () => {
   const [users,setUsers] = useState<UserResponse[]>([]);
@@ -11,11 +12,12 @@ const Login = () => {
     <div className="App">
       {/* <Header/> */}
       <body>
-        <p>
+        <h1>
           Login Page
-        </p>
+        </h1>
         <SelectLabels users={users} setUsers={setUsers}/>
       </body>
+      <img src={daikansha} alt='いや本当マジでありがとう' width='100%'/>
     </div>
   );
 }

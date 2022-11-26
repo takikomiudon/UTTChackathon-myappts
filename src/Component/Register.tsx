@@ -47,9 +47,9 @@ const Register = () => {
     <div className="App">
       {/* <Header/> */}
       <body>
-        <p>
+        <h1>
           User Register Page
-        </p>
+        </h1>
         <form style={{ display: "flex", flexDirection: "column" }}>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <TextField 

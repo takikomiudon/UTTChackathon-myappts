@@ -122,7 +122,7 @@ export default function SelectLabels(props:Props) {
       </FormControl>
     </div>
     <div>
-      <Link to='/home'>
+      <Link to='/home' style={{ textDecoration: 'none' }}>
         <Button variant="contained" startIcon={<LoginOutlinedIcon/>} onClick={handleLogin}>
           Login
         </Button>

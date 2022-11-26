@@ -25,6 +25,9 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import {url} from '../type';
+import Divider from '@mui/material/Divider';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
 const drawerWidth = 240;
 
@@ -147,6 +150,7 @@ export default function Sidebar(props:Props) {
             </Toolbar>
         </AppBar>
       </ThemeProvider>
+      
       <CustomizedDrawer
         variant="permanent"
         sx={{
@@ -157,15 +161,17 @@ export default function Sidebar(props:Props) {
       >
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
-          <List>
-            {[{title:'Home',link:'/home',color:'#007fff'},
+          <List sx={{display: 'flex', flexDirection: 'column' }}>
+            {userInfo.nameId!='' ?
+             [{title:'Home',link:'/home',color:'#007fff'},
               {title:'Ranking',link:'/ranking',color:'#ff007f'},
               {title:'List',link:'/list',color:'#00ff00'},
               {title:'Post',link:'/post',color:'#7f00ff'}
             ].map((text, index) => (
+              <div>
               <ListItem key={text.title} disablePadding>
                 <Link to={text.link} style={{ textDecoration: 'none' }}>
-                    <Button  variant="outlined" sx={{width: drawerWidth*0.9, margin:1}}>
+                    <Button variant="outlined" sx={{width: drawerWidth*0.9, margin:1}}>
                     <ListItemIcon sx={{color:text.color}}>
                         {index === 0 ? <HomeOutlinedIcon /> :
                         index === 1 ? <WorkspacePremiumOutlinedIcon /> :
@@ -176,7 +182,51 @@ export default function Sidebar(props:Props) {
                     </Button>
                 </Link>
               </ListItem>
-            ))}
+              </div>
+            )
+            ):null}
+            <div style={{flexGrow: 5 }}></div>
+            <Divider color='#01579b' flexItem></Divider>
+            {userInfo.nameId!='' ? null:
+                <ListItem
+                component={Link}
+                to='/register'
+                style={{ textDecoration: 'none' }}
+                disablePadding
+              >
+                  <Button variant="outlined" sx={{width: drawerWidth*0.9, margin:1}}>
+                    <ListItemIcon sx={{color: '#ffff00'}}>
+                      <PersonAddAltOutlinedIcon/>
+                    </ListItemIcon>
+                    <ListItemText sx={{color: '#ffff00'}}>
+                      Register
+                    </ListItemText>
+                  </Button>
+                </ListItem>
+              }
+              <ListItem
+                component={Link}
+                to='/login'
+                style={{ textDecoration: 'none' }}
+                onClick={
+                  userInfo.nameId!='' ?
+                  () => {
+                    setUserInfo({...userInfo, nameId: ""})
+                    localStorage.setItem("nameId","")
+                    localStorage.setItem("name","")
+                  }
+                :()=>{}}
+                disablePadding
+              >
+              <Button variant="outlined" sx={{width: drawerWidth*0.9, margin:1}}>
+                <ListItemIcon sx={{color: '#ffa500'}}>
+                  {userInfo.nameId!='' ? <LogoutOutlinedIcon/>: <LoginOutlinedIcon/>}
+                </ListItemIcon>
+                <ListItemText sx={{color: '#ffa500'}}>
+                  {userInfo.nameId!='' ? 'Logout' : 'Login'}
+                </ListItemText>
+              </Button>
+            </ListItem>
           </List>
         </Box>
       </CustomizedDrawer>

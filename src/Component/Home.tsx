@@ -38,9 +38,9 @@ function Home() {
   return (
     <div className="App">
       {/* <Header/> */}
-      <body>
-        Welcome, {userInfo.name}！！
-      </body>
+      <h1>
+        Welcome, <strong>{userInfo.name}</strong>！！
+      </h1>
       <Link to="/userupdate" style={{ textDecoration: 'none' }}>
         <Button variant="contained" startIcon={<ManageAccountsOutlinedIcon/>} href='/userupdate'>
           Change User Name

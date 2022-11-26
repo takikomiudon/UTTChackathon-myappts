@@ -53,9 +53,9 @@ export default function Ranking() {
   return (
     <div className="App">
       {/* <Header/> */}
-      <p>POINT RANKING</p>
+      <h1>POINT RANKING</h1>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <Tabs value={value} onChange={handleChange} centered>
+        <Tabs value={value} onChange={handleChange} centered variant="fullWidth">
           <Tab label="All-Time" />
           <Tab label="Annual" />
           <Tab label="Monthly"/>

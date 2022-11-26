@@ -14,15 +14,17 @@ const FormPage = () => {
       return;
     }
 
-    if (point <= 0 || point > 100){
+    if (point <= 0 || point > 100 || point == null){
       alert("Please enter point between 1 and 100");
       return;
     }
 
     if (message.length > 100){
       alert("Please enter a message shorter than 100 characters")
+      return;
     } else if (message.trim().length == 0){
       alert("Please enter a message")
+      return;
     }
 
     try{
@@ -59,6 +61,7 @@ const FormPage = () => {
 
   return (
     <div className="App">
+      <h1>Contribution Post</h1>
       {/* <Header/> */}
       <body>
         <Form

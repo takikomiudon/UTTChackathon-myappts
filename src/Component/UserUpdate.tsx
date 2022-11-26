@@ -51,9 +51,9 @@ const UserUpdate = () => {
     <div className="App">
       {/* <Header/> */}
       <body>
-        <p>
+        <h1>
           User Update Page
-        </p>
+        </h1>
         <form style={{ display: "flex", flexDirection: "column" }}>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <TextField 
@@ -67,7 +67,7 @@ const UserUpdate = () => {
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <Button variant="contained" endIcon={<PersonAddAltOutlinedIcon />} onClick={(e) => submit(e)}>
-            Register
+            Update
           </Button>
         </FormControl>
       </form>
